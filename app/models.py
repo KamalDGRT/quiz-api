@@ -49,3 +49,32 @@ class User(Base):
         "Role",
         foreign_keys=[role_id]
     )
+
+
+class Topic(Base):
+    __tablename__ = "topic"
+
+    topic_id = Column(Integer, primary_key=True, index=True)
+    topic_name = Column(String(length=100), index=True, nullable=False)
+    created_at = Column(
+        TIMESTAMP(timezone=True),
+        nullable=False,
+        server_default=text('now()')
+    )
+    created_by = Column(
+        Integer,
+        ForeignKey("user.user_id", ondelete="CASCADE"),
+        nullable=False
+    )
+    updated_at = Column(
+        TIMESTAMP(timezone=True),
+        nullable=False,
+        server_default=text('now()')
+    )
+    updated_by = Column(
+        Integer,
+        ForeignKey("user.user_id", ondelete="CASCADE"),
+        nullable=False
+    )
+    creator = relationship("User", foreign_keys=[created_by])
+    updater = relationship("User", foreign_keys=[updated_by])
