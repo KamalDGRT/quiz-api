@@ -1,7 +1,7 @@
 # Every model represents a table in our database.
 
 from sqlalchemy.sql.schema import ForeignKey
-from sqlalchemy import Column, Integer, String
+from sqlalchemy import Column, Integer, String, Text
 from sqlalchemy.orm import relationship
 from sqlalchemy.sql.expression import text
 from sqlalchemy.sql.sqltypes import TIMESTAMP
@@ -76,5 +76,40 @@ class Topic(Base):
         ForeignKey("user.user_id", ondelete="CASCADE"),
         nullable=False
     )
+    creator = relationship("User", foreign_keys=[created_by])
+    updater = relationship("User", foreign_keys=[updated_by])
+
+class Question(Base):
+    __tablename__ = "question"
+
+    question_id = Column(Integer, primary_key=True, index=True)    
+    topic_id = Column(
+        Integer,
+        ForeignKey("topic.topic_id", ondelete="CASCADE"),
+        nullable=False
+    )
+    question_text = Column(Text, index=True, nullable=False)
+    created_at = Column(
+        TIMESTAMP(timezone=True),
+        nullable=False,
+        server_default=text('now()')
+    )
+    created_by = Column(
+        Integer,
+        ForeignKey("user.user_id", ondelete="CASCADE"),
+        nullable=False
+    )
+    updated_at = Column(
+        TIMESTAMP(timezone=True),
+        nullable=False,
+        server_default=text('now()')
+    )
+    updated_by = Column(
+        Integer,
+        ForeignKey("user.user_id", ondelete="CASCADE"),
+        nullable=False
+    )
+
+    topic = relationship("Topic", foreign_keys=[topic_id])
     creator = relationship("User", foreign_keys=[created_by])
     updater = relationship("User", foreign_keys=[updated_by])
