@@ -36,3 +36,10 @@ class User(BaseModel):
 
     class Config:
         orm_mode = True
+
+
+class UserSimple(BaseModel):
+    full_name: str
+
+    class Config:
+        orm_mode = True

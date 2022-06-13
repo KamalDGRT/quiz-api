@@ -3,7 +3,7 @@
 
 from fastapi import FastAPI
 
-from app.routers import auth, user
+from app.routers import auth, user, topic
 # Import your routers here
 # example: from app.routers import module1
 
@@ -19,6 +19,7 @@ app = FastAPI(
 
 app.include_router(user.router)
 app.include_router(auth.router)
+app.include_router(topic.router)
 
 # use the imported router in your project here:
 # app.include_router(module1.router)
