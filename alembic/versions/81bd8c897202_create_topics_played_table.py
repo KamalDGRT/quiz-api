@@ -1,8 +1,8 @@
-"""create topic_played table
+"""create topics_played table
 
-Revision ID: 5742ea811eef
-Revises: 9affe7710266
-Create Date: 2022-06-12 10:29:08.609735
+Revision ID: 81bd8c897202
+Revises: 9a90d9fdfec7
+Create Date: 2022-06-14 02:53:18.951946
 
 """
 from alembic import op
@@ -10,8 +10,8 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '5742ea811eef'
-down_revision = '9affe7710266'
+revision = '81bd8c897202'
+down_revision = '9a90d9fdfec7'
 branch_labels = None
 depends_on = None
 

@@ -1,8 +1,8 @@
 """create question table
 
-Revision ID: 9affe7710266
+Revision ID: 9a90d9fdfec7
 Revises: 7f4e3e93e7e2
-Create Date: 2022-06-12 10:19:26.764668
+Create Date: 2022-06-14 02:52:52.335690
 
 """
 from alembic import op
@@ -10,7 +10,7 @@ import sqlalchemy as sa
 
 
 # revision identifiers, used by Alembic.
-revision = '9affe7710266'
+revision = '9a90d9fdfec7'
 down_revision = '7f4e3e93e7e2'
 branch_labels = None
 depends_on = None
@@ -22,6 +22,11 @@ def upgrade() -> None:
     sa.Column('question_id', sa.Integer(), nullable=False),
     sa.Column('topic_id', sa.Integer(), nullable=False),
     sa.Column('question_text', sa.Text(), nullable=False),
+    sa.Column('option_a', sa.String(length=100), nullable=False),
+    sa.Column('option_b', sa.String(length=100), nullable=False),
+    sa.Column('option_c', sa.String(length=100), nullable=False),
+    sa.Column('option_d', sa.String(length=100), nullable=False),
+    sa.Column('correct_option', sa.String(length=10), nullable=False),
     sa.Column('created_at', sa.TIMESTAMP(timezone=True), server_default=sa.text('now()'), nullable=False),
     sa.Column('created_by', sa.Integer(), nullable=False),
     sa.Column('updated_at', sa.TIMESTAMP(timezone=True), server_default=sa.text('now()'), nullable=False),

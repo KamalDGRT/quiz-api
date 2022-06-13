@@ -89,7 +89,14 @@ class Question(Base):
         ForeignKey("topic.topic_id", ondelete="CASCADE"),
         nullable=False
     )
+
     question_text = Column(Text, index=True, nullable=False)
+    option_a = Column(String(length=100), nullable=False)
+    option_b = Column(String(length=100), nullable=False)
+    option_c = Column(String(length=100), nullable=False)
+    option_d = Column(String(length=100), nullable=False)
+    correct_option = Column(String(length=10), nullable=False)
+
     created_at = Column(
         TIMESTAMP(timezone=True),
         nullable=False,
