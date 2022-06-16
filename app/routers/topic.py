@@ -33,7 +33,7 @@ def get_Topics(
 def create_topic(
     topic: schema.TopicCreate,
     db: Session = Depends(get_db),
-    current_user: int = Depends(oauth2.get_current_user)
+    current_user: models.User = Depends(oauth2.get_current_user)
 ):
     check_for_root(current_user.role_id, 1)
 
@@ -57,7 +57,7 @@ def create_topic(
 def create_many_topics(
     topics: List[schema.TopicCreate],
     db: Session = Depends(get_db),
-    current_user: int = Depends(oauth2.get_current_user)
+    current_user: models.User = Depends(oauth2.get_current_user)
 ):
     check_for_root(current_user.role_id, 1)
 
@@ -83,7 +83,7 @@ def create_many_topics(
 def get_Topic(
     id: int,
     db: Session = Depends(get_db),
-    current_user: int = Depends(oauth2.get_current_user)
+    current_user: models.User = Depends(oauth2.get_current_user)
 ):
     check_for_root(current_user.role_id, 1)
 
@@ -104,7 +104,7 @@ def get_Topic(
 def delete_topic(
     id: int,
     db: Session = Depends(get_db),
-    current_user: int = Depends(oauth2.get_current_user)
+    current_user: models.User = Depends(oauth2.get_current_user)
 ):
     check_for_root(current_user.role_id, 1)
 
@@ -133,7 +133,7 @@ def update_Topic(
     id: int,
     updated_topic: schema.TopicCreate,
     db: Session = Depends(get_db),
-    current_user: int = Depends(oauth2.get_current_user)
+    current_user: models.User = Depends(oauth2.get_current_user)
 ):
     check_for_root(current_user.role_id, 1)
 

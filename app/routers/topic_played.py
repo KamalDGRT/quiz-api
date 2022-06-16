@@ -19,7 +19,7 @@ router = APIRouter(
 )
 def get_Topics_Played(
     db: Session = Depends(get_db),
-    current_user: int = Depends(oauth2.get_current_user)
+    current_user: models.User = Depends(oauth2.get_current_user)
 ):
     check_for_root(current_user.role_id, 1)
     results = db.query(models.TopicPlayed).all()
@@ -47,7 +47,7 @@ def get_Topics_Played_by_Current_User(
 def add_new_record_for_user(
     topic_played: schema.TopicPlayedCreate,
     db: Session = Depends(get_db),
-    current_user: int = Depends(oauth2.get_current_user)
+    current_user: models.User = Depends(oauth2.get_current_user)
 ):
     check_for_root(current_user.role_id, 1)
 
@@ -70,7 +70,7 @@ def add_new_record_for_user(
 def get_Topic_Played_Info(
     id: int,
     db: Session = Depends(get_db),
-    current_user: int = Depends(oauth2.get_current_user)
+    current_user: models.User = Depends(oauth2.get_current_user)
 ):
     check_for_root(current_user.role_id, 1)
 
@@ -91,7 +91,7 @@ def get_Topic_Played_Info(
 def delete_topic_played(
     id: int,
     db: Session = Depends(get_db),
-    current_user: int = Depends(oauth2.get_current_user)
+    current_user: models.User = Depends(oauth2.get_current_user)
 ):
     topic_played_query = db.query(
         models.TopicPlayed

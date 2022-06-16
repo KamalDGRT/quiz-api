@@ -17,7 +17,7 @@ router = APIRouter(
     response_model=schema.UserOut
 )
 def get_current_user(
-    current_user: int = Depends(oauth2.get_current_user)
+    current_user: models.User = Depends(oauth2.get_current_user)
 ):
     return current_user
 
@@ -25,9 +25,9 @@ def get_current_user(
 @ router.get('/all', response_model=List[schema.UserOut])
 def get_users(
     db: Session = Depends(get_db),
-    current_user: int = Depends(oauth2.get_current_user)
+    current_user: models.User = Depends(oauth2.get_current_user)
 ):
-    utils.check_for_root()
+    utils.check_for_root(current_user.role_id, 1)
     results = db.query(models.User).all()
     return results
 
@@ -63,7 +63,7 @@ def create_user(user: schema.UserCreate, db: Session = Depends(get_db)):
 def get_user(
     id: int,
     db: Session = Depends(get_db),
-    current_user: int = Depends(oauth2.get_current_user)
+    current_user: models.User = Depends(oauth2.get_current_user)
 ):
     utils.check_for_root(current_user.role_id, 1)
 

@@ -33,7 +33,7 @@ def get_Questions(
 def create_question(
     question: schema.QuestionCreate,
     db: Session = Depends(get_db),
-    current_user: int = Depends(oauth2.get_current_user)
+    current_user: models.User = Depends(oauth2.get_current_user)
 ):
     check_for_root(current_user.role_id, 1)
 
@@ -57,7 +57,7 @@ def create_question(
 def create_many_questions(
     questions: List[schema.QuestionCreate],
     db: Session = Depends(get_db),
-    current_user: int = Depends(oauth2.get_current_user)
+    current_user: models.User = Depends(oauth2.get_current_user)
 ):
     check_for_root(current_user.role_id, 1)
 
@@ -83,7 +83,7 @@ def create_many_questions(
 def get_Question(
     id: int,
     db: Session = Depends(get_db),
-    current_user: int = Depends(oauth2.get_current_user)
+    current_user: models.User = Depends(oauth2.get_current_user)
 ):
     check_for_root(current_user.role_id, 1)
 
@@ -104,7 +104,7 @@ def get_Question(
 def delete_question(
     id: int,
     db: Session = Depends(get_db),
-    current_user: int = Depends(oauth2.get_current_user)
+    current_user: models.User = Depends(oauth2.get_current_user)
 ):
     check_for_root(current_user.role_id, 1)
 
@@ -133,7 +133,7 @@ def update_Question(
     id: int,
     updated_question: schema.QuestionCreate,
     db: Session = Depends(get_db),
-    current_user: int = Depends(oauth2.get_current_user)
+    current_user: models.User = Depends(oauth2.get_current_user)
 ):
     check_for_root(current_user.role_id, 1)
 
