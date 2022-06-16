@@ -3,7 +3,7 @@
 
 from fastapi import FastAPI
 
-from app.routers import auth, user, topic, question
+from app.routers import auth, user, topic, question, topic_played
 
 # Import your routers here
 # example: from app.routers import module1
@@ -11,10 +11,10 @@ from app.routers import auth, user, topic, question
 app = FastAPI(
     title="Quiz API",
     description="API for the Quiz APP",
-    version="0.5.0",
+    version="0.6.0",
     contact={
         "name": "Kamal",
-        "url": "https://github.com/KamalDGRT/quiz-app"
+        "url": "https://github.com/KamalDGRT/quiz-api"
     }
 )
 
@@ -22,6 +22,7 @@ app.include_router(user.router)
 app.include_router(auth.router)
 app.include_router(topic.router)
 app.include_router(question.router)
+app.include_router(topic_played.router)
 
 # use the imported router in your project here:
 # app.include_router(module1.router)

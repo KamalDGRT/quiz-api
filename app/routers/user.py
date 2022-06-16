@@ -27,7 +27,7 @@ def get_users(
     db: Session = Depends(get_db),
     current_user: int = Depends(oauth2.get_current_user)
 ):
-    # utils.check_for_root()
+    utils.check_for_root()
     results = db.query(models.User).all()
     return results
 
